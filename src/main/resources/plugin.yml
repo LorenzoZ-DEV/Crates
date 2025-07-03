@@ -1,0 +1,4 @@
+name: Crates
+version: '${version}'
+main: dev.lorenz.crates.CratesBUkkit
+api-version: '1.21'
