@@ -1,6 +1,5 @@
-package dev.lorenz.crates.application;
+package dev.lorenz.crates.application.hooks;
 
-import lombok.Getter;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;

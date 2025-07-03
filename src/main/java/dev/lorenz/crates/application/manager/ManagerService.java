@@ -1,5 +1,7 @@
 package dev.lorenz.crates.application.manager;
 
+import dev.lorenz.crates.application.crates.CrateManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +21,7 @@ public class ManagerService
     }
 
     public void registerManager() {
-        // aggiunta del metodo del addmanager
-
+        addManager ( new CrateManager () );
         managers.forEach(Manager::start);
     }
 
@@ -35,7 +36,7 @@ public class ManagerService
         managers.add(manager);
     }
 
-    public static ManagerService get() {
+    public static ManagerService get(Class<CrateManager> crateManagerClass) {
         return INSTANCE;
     }
 }

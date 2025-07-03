@@ -1,6 +1,6 @@
 package dev.lorenz.crates;
 
-import dev.lorenz.crates.application.CratePlaceholder;
+import dev.lorenz.crates.application.hooks.CratePlaceholder;
 import dev.lorenz.crates.application.manager.ManagerService;
 import dev.lorenz.crates.infra.CC;
 import dev.lorenz.crates.infra.ConfigFile;
@@ -13,10 +13,12 @@ import java.util.List;
 public class CratePlugin
 {
     @Getter
-    private CratePlugin INSTANCE;
+    private static CratePlugin INSTANCE;
+    @Getter
     private JavaPlugin plugin;
+    @Getter
     private ManagerService service;
-
+    @Getter
     private ConfigFile configFile, messagesFile,cratesSettingsFile, cratesFile, cratesRewardsFile, cratesKeysFile, cratesCratesFile;
 
     public CratePlugin(JavaPlugin plugin) {
@@ -82,6 +84,5 @@ public class CratePlugin
                 // listeners da registrare
         ).forEach (listener -> plugin.getServer ().getPluginManager().registerEvents(listener, plugin));
     }
-
 
 }
