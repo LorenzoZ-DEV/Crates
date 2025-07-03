@@ -30,7 +30,7 @@ public interface CC {
 
     static void info(String message){
         message = ChatColor.translateAlternateColorCodes('&', message);
-        message = "&e[UTILSREFORGED] &7 " + message;
+        message = "&e[CRATES] &7 " + message;
         Bukkit.getConsoleSender().sendMessage( CC.translate ( message ));
     }
 
@@ -44,7 +44,7 @@ public interface CC {
 
     static void database(String message){
         message = ChatColor.translateAlternateColorCodes('&', message);
-        message = "&2[MONGODB] &7 " + message;
+        message = "&2[DATABASE] &7 " + message;
         Bukkit.getConsoleSender().sendMessage( CC.translate ( message ));
     }
 

@@ -4,6 +4,8 @@ import dev.lorenz.crates.application.hooks.CratePlaceholder;
 import dev.lorenz.crates.application.manager.ManagerService;
 import dev.lorenz.crates.infra.CC;
 import dev.lorenz.crates.infra.ConfigFile;
+import dev.lorenz.crates.infra.sql.DatabaseManager;
+import dev.lorenz.crates.listener.CrateInteractListener;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -19,7 +21,9 @@ public class CratePlugin
     @Getter
     private ManagerService service;
     @Getter
-    private ConfigFile configFile, messagesFile,cratesSettingsFile, cratesFile, cratesRewardsFile, cratesKeysFile, cratesCratesFile;
+    private ConfigFile configFile, messagesFile,cratesSettingsFile, cratesFile, cratesRewardsFile, cratesKeysFile, cratesCratesFile, storageFile;
+    @Getter
+    private final DatabaseManager databaseManager = new DatabaseManager();
 
     public CratePlugin(JavaPlugin plugin) {
         this.plugin = plugin;
@@ -32,12 +36,14 @@ public class CratePlugin
             registerConfig();
             registerListeners();
             registerHooks();
+            databaseManager.start(storageFile);
             CC.info("&aPlugin Crates avviato con successo.");
         }
     }
 
     public void stop() {
         if (INSTANCE != null) {
+            databaseManager.stop ( );
             this.service.shutdown();
             INSTANCE = null;
 
@@ -72,6 +78,7 @@ public class CratePlugin
         this.cratesRewardsFile = new ConfigFile(plugin, "crates/rewards.yml");
         this.cratesKeysFile = new ConfigFile(plugin, "crates/keys.yml");
         this.cratesCratesFile = new ConfigFile(plugin, "crates/crates.yml");
+        this.storageFile = new ConfigFile(plugin, "storage.yml");
     }
     private void registerService() {
         CC.info("Registering service...");
@@ -81,7 +88,7 @@ public class CratePlugin
     private void registerListeners() {
         CC.info("Registering listeners...");
         List.of (
-                // listeners da registrare
+                new CrateInteractListener ()
         ).forEach (listener -> plugin.getServer ().getPluginManager().registerEvents(listener, plugin));
     }
 

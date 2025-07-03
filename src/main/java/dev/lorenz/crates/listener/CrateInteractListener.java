@@ -46,8 +46,11 @@ public class CrateInteractListener implements Listener
         }
 
         if (!hand.getItemMeta().getDisplayName().contains(crate.getDisplayName())) {
-            player.sendMessage("§!");
+            player.sendMessage(CC.translate ( CratePlugin.getINSTANCE ().getMessagesFile ().getString ( "crates.crate-wrong","&cQuesta crate non è quella giusta, controlla bene!" ) ));
             return;
         }
+        hand.setAmount(hand.getAmount() - 1);
+        player.sendMessage ( CratePlugin.getINSTANCE ().getMessagesFile ().getString ( "crates.opening","&aStai aprendo la crate %crate%" ).replace ( "%crate%",crate.getDisplayName () ) );
+        //TODO Implementare le animazioni di apertura della crate
     }
 }
