@@ -51,8 +51,10 @@ public class DatabaseManager {
             }
 
         } catch (Exception e) {
+            CC.line();
             CC.error("&4&lU_U &cErrore durante la connessione MySQL:");
             e.printStackTrace();
+            CC.line ();
         }
     }
 

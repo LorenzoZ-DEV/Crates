@@ -72,8 +72,10 @@ public class VirtualKeyManager implements Manager
             ps.executeUpdate();
 
         } catch (SQLException e) {
-            CC.error("&cErrore nel salvataggio chiavi virtuali:");
+            CC.line ();
+            CC.error("&cErrore nel salvataggio crates virtuali:");
             e.printStackTrace();
+            CC.line ();
         }
     }
 

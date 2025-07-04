@@ -21,7 +21,7 @@ public class CratePlugin
     @Getter
     private ManagerService service;
     @Getter
-    private ConfigFile configFile, messagesFile,cratesSettingsFile, cratesFile, cratesRewardsFile, cratesKeysFile, cratesCratesFile, storageFile;
+    private ConfigFile configFile, messagesFile, storageFile;
     @Getter
     private final DatabaseManager databaseManager = new DatabaseManager();
 
@@ -45,6 +45,7 @@ public class CratePlugin
         if (INSTANCE != null) {
             databaseManager.stop ( );
             this.service.shutdown();
+            this.configFile.saveFile ();
             INSTANCE = null;
 
         }
@@ -73,11 +74,6 @@ public class CratePlugin
     private void registerConfig(){
         this.configFile = new ConfigFile(plugin, "config.yml");
         this.messagesFile = new ConfigFile(plugin, "messages.yml");
-        this.cratesSettingsFile = new ConfigFile(plugin, "crates/settings.yml");
-        this.cratesFile = new ConfigFile(plugin, "crates/crates.yml");
-        this.cratesRewardsFile = new ConfigFile(plugin, "crates/rewards.yml");
-        this.cratesKeysFile = new ConfigFile(plugin, "crates/keys.yml");
-        this.cratesCratesFile = new ConfigFile(plugin, "crates/crates.yml");
         this.storageFile = new ConfigFile(plugin, "storage.yml");
     }
     private void registerService() {

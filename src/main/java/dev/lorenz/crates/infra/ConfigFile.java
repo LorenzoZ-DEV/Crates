@@ -46,8 +46,10 @@ public class ConfigFile extends YamlConfiguration {
                 super.save(this.filePath.toFile());
             }
         } catch (InvalidConfigurationException | IOException ex) {
-            plugin.getLogger().severe("Error initializing config file: " + fileName);
+            CC.line ();
+            CC.error ("Error initializing config file: " + fileName);
             ((Exception)ex).printStackTrace();
+            CC.line ();
         }
 
     }
@@ -64,8 +66,11 @@ public class ConfigFile extends YamlConfiguration {
         try {
             Files.createDirectories(Path.of(this.plugin.getDataFolder().getPath()));
         } catch (IOException e) {
-            this.plugin.getLogger().severe("Could not create plugin data folder");
+            CC.line ();
+            CC.error("Could not create plugin data folder");
             e.printStackTrace();
+            CC.line ();
+
         }
 
     }
@@ -73,10 +78,14 @@ public class ConfigFile extends YamlConfiguration {
     public void reload() {
         try {
             super.load(this.filePath.toFile());
-            this.plugin.getLogger().info("Reloaded config file: " + this.fileName);
+            CC.line ();
+            CC.info ("Reloaded config file: " + this.fileName);
+            CC.line ();
         } catch (InvalidConfigurationException | IOException ex) {
-            this.plugin.getLogger().severe("Error reloading config file: " + this.fileName);
+            CC.line ();
+            CC.error ("Error reloading config file: " + this.fileName);
             ((Exception)ex).printStackTrace();
+            CC.line ();
         }
 
     }
@@ -84,10 +93,12 @@ public class ConfigFile extends YamlConfiguration {
     public void saveFile() {
         try {
             super.save(this.filePath.toFile());
-            this.plugin.getLogger().info("Saved config file: " + this.fileName);
+            CC.info ("Saved config file: " + this.fileName);
         } catch (IOException ex) {
-            this.plugin.getLogger().severe("Error saving config file: " + this.fileName);
+            CC.line ();
+            CC.error ("Error saving config file: " + this.fileName);
             ex.printStackTrace();
+            CC.line ();
         }
 
     }
