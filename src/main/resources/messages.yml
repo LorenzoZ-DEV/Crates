@@ -1,5 +1,4 @@
 crates:
-  no-crate: "&cNon disponi della crate %crate%"
-  crate-invalid: "&cSembra che questa crate non sia valida, per favore apri un ticket su Discord."
-  crate-wrong: "&cQuesta crate non è quella giusta, controlla bene!"
   opening: "&aStai aprendo la crate %crate%"
+  opening_virtual: "&aStai aprendo la crate %crate% con una chiave virtuale"
+  no-keys: "&cNon disponi della chiave fisica o virtuale per aprire questa crate %crate%"

@@ -4,24 +4,20 @@ import dev.lorenz.crates.CratePlugin;
 import dev.lorenz.crates.infra.CC;
 import dev.lorenz.crates.infra.sql.DatabaseManager;
 import dev.lorenz.crates.application.manager.Manager;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.sql.*;
+import java.util.*;
 
-public  class StatsManager implements Manager {
+public class StatsManager implements Manager {
 
+    @Override
     public void start() {
         createTable();
         CC.info("StatsManager avviato.");
     }
 
+    @Override
     public void stop() {
         CC.info("StatsManager arrestato.");
     }
@@ -47,23 +43,92 @@ public  class StatsManager implements Manager {
         }
     }
 
-
-
-    public int getOpenedCrates(UUID uuid, String crateId) {
+    public int getOpenedCrates(UUID uuid) {
         try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement ps = conn.prepareStatement("SELECT opened_crates FROM crate_stats WHERE uuid = ? AND crate_id = ?")) {
+             PreparedStatement ps = conn.prepareStatement(
+                     "SELECT SUM(opened_crates) as total FROM crate_stats WHERE uuid = ?"
+             )) {
             ps.setString(1, uuid.toString());
-            ps.setString(2, crateId);
             try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt("opened_crates");
+                if (rs.next()) return rs.getInt("total");
+            }
+        } catch (SQLException e) {
+            CC.error("&cErrore nel recupero totale opened_crates:");
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int getKeysUsed(UUID uuid) {
+        try (Connection conn = DatabaseManager.getConnection();
+             PreparedStatement ps = conn.prepareStatement(
+                     "SELECT SUM(keys_used) as total FROM crate_stats WHERE uuid = ?"
+             )) {
+            ps.setString(1, uuid.toString());
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) return rs.getInt("total");
+            }
+        } catch (SQLException e) {
+            CC.error("&cErrore nel recupero totale keys_used:");
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public List<LeaderboardEntry> getLeaderboard(int page, int limit) {
+        List<LeaderboardEntry> list = new ArrayList<>();
+        int offset = (page - 1) * limit;
+
+        try (Connection conn = DatabaseManager.getConnection();
+             PreparedStatement ps = conn.prepareStatement(
+                     "SELECT uuid, SUM(opened_crates) AS total FROM crate_stats GROUP BY uuid ORDER BY total DESC LIMIT ? OFFSET ?"
+             )) {
+            ps.setInt(1, limit);
+            ps.setInt(2, offset);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    UUID uuid = UUID.fromString(rs.getString("uuid"));
+                    int totalOpened = rs.getInt("total");
+                    list.add(new LeaderboardEntry(uuid, totalOpened));
                 }
             }
         } catch (SQLException e) {
-            CC.line();
+            CC.error("&cErrore nel recuperare la leaderboard globale: " + e.getMessage());
+        }
+
+        return list;
+    }
+
+    public int getOpenedCrates(UUID uuid, String crateId) {
+        try (Connection conn = DatabaseManager.getConnection();
+             PreparedStatement ps = conn.prepareStatement(
+                     "SELECT opened_crates FROM crate_stats WHERE uuid = ? AND crate_id = ?"
+             )) {
+            ps.setString(1, uuid.toString());
+            ps.setString(2, crateId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) return rs.getInt("opened_crates");
+            }
+        } catch (SQLException e) {
             CC.error("&cErrore nel recupero opened_crates per crate " + crateId + ":");
             e.printStackTrace();
-            CC.line();
+        }
+        return 0;
+    }
+
+    public int getKeysUsed(UUID uuid, String crateId) {
+        try (Connection conn = DatabaseManager.getConnection();
+             PreparedStatement ps = conn.prepareStatement(
+                     "SELECT keys_used FROM crate_stats WHERE uuid = ? AND crate_id = ?"
+             )) {
+            ps.setString(1, uuid.toString());
+            ps.setString(2, crateId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) return rs.getInt("keys_used");
+            }
+        } catch (SQLException e) {
+            CC.error("&cErrore nel recupero keys_used per crate " + crateId + ":");
+            e.printStackTrace();
         }
         return 0;
     }
@@ -79,7 +144,6 @@ public  class StatsManager implements Manager {
             ps.setString(1, crateId);
             ps.setInt(2, limit);
             ps.setInt(3, offset);
-
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     UUID uuid = UUID.fromString(rs.getString("uuid"));
@@ -88,46 +152,24 @@ public  class StatsManager implements Manager {
                 }
             }
         } catch (SQLException e) {
-            CC.error("Errore nel recuperare leaderboard per cassa '" + crateId + "': " + e.getMessage());
+            CC.error("&cErrore nel recuperare la leaderboard per crate '" + crateId + "': " + e.getMessage());
         }
 
         return list;
     }
 
 
-
-
-    public int getKeysUsed(UUID uuid, String crateId) {
-        try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement ps = conn.prepareStatement("SELECT keys_used FROM crate_stats WHERE uuid = ? AND crate_id = ?")) {
-            ps.setString(1, uuid.toString());
-            ps.setString(2, crateId);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt("keys_used");
-                }
-            }
-        } catch (SQLException e) {
-            CC.line();
-            CC.error("&cErrore nel recupero keys_used per crate " + crateId + ":");
-            e.printStackTrace();
-            CC.line();
-        }
-        return 0;
-    }
-
-
     public void addOpenedCrates(UUID uuid, String crateId, int amount) {
         int current = getOpenedCrates(uuid, crateId);
-        setStats(uuid, crateId, current + amount, getKeysUsed(uuid, crateId));
+        int keys = getKeysUsed(uuid, crateId);
+        setStats(uuid, crateId, current + amount, keys);
     }
-
 
     public void addKeysUsed(UUID uuid, String crateId, int amount) {
         int current = getKeysUsed(uuid, crateId);
-        setStats(uuid, crateId, getOpenedCrates(uuid, crateId), current + amount);
+        int opened = getOpenedCrates(uuid, crateId);
+        setStats(uuid, crateId, opened, current + amount);
     }
-
 
     private void setStats(UUID uuid, String crateId, int openedCrates, int keysUsed) {
         try (Connection conn = DatabaseManager.getConnection();
@@ -149,6 +191,4 @@ public  class StatsManager implements Manager {
             CC.line();
         }
     }
-
-
 }

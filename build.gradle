@@ -9,8 +9,9 @@ repositories {
     mavenCentral()
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
-    maven { url 'https://repo.codemc.io/repository/maven-releases/' }
-    maven { url 'https://repo.codemc.io/repository/maven-snapshots/' }
+    maven { url = uri("https://repo.codemc.io/repository/maven-releases/") }
+
+    maven { url = uri("https://repo.codemc.io/repository/maven-snapshots/") }
     maven { url 'https://repo.extendedclip.com/releases/' }
     maven { url 'https://repo.extendedclip.com/content/repositories/placeholderapi/'}
     maven { url 'https://jitpack.io' }
@@ -29,7 +30,7 @@ dependencies {
     compileOnly 'me.clip:placeholderapi:2.11.6'
     implementation 'com.zaxxer:HikariCP:5.1.0'
     compileOnly 'com.github.decentsoftware-eu:decentholograms:2.9.3'
-    compileOnly 'com.comphenix.protocol:ProtocolLib:5.3.0'
+    compileOnly("com.github.retrooper:packetevents-spigot:2.8.0")
 
 
 }

@@ -107,10 +107,11 @@ public class CrateCommand {
 
         List<LeaderboardEntry> leaderboard;
         if (crateId.equalsIgnoreCase("global")) {
-            leaderboard = stats.getLeaderboard(1, lines); // globale
+            leaderboard = stats.getLeaderboard(1, lines); // funziona!
         } else {
             leaderboard = stats.getLeaderboard(crateId.toLowerCase(), 1, lines);
         }
+
 
         Location location = sender.getLocation();
         String hologramId = "leaderboard_" + crateId.toLowerCase() + "_" + System.currentTimeMillis();

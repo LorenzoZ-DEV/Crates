@@ -21,7 +21,7 @@ public class CrateManager implements Manager
         crates.clear();
     }
     private void loadcrates() {
-        ConfigFile configFile = CratePlugin.getINSTANCE ( ).getCratesFile ( );
+        ConfigFile configFile = CratePlugin.getINSTANCE ( ).getCrateFile ( );
 
         if(!configFile.contains ( "crates" )) {
             CC.warning ( "No crates found in crates.yml" );
