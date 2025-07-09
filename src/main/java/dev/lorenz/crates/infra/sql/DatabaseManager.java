@@ -4,12 +4,14 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import dev.lorenz.crates.infra.utils.CC;
 import dev.lorenz.crates.infra.utils.ConfigFile;
+import lombok.Getter;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
 public class DatabaseManager {
 
+    @Getter
     private static HikariDataSource dataSource;
 
     public void start(ConfigFile storageFile) {

@@ -13,8 +13,13 @@ public class VirtualKeyManager implements Manager
     @Override
     public void start() {
         CC.info("Starting virtual key manager...");
+        if (DatabaseManager.getDataSource() == null) {
+            CC.error("&cVirtualKeyManager non può essere avviato: dataSource non inizializzato");
+            return;
+        }
         createTable();
     }
+
     @Override
     public void stop() {
         CC.info("Stopping virtual key manager...");
