@@ -82,12 +82,6 @@
                 CC.warning("&7[&cERROR&7] &fDecentHolograms not found. Some features may not work.");
             }
 
-            if (Bukkit.getPluginManager().isPluginEnabled("ProtocolLib")) {
-                CC.info("&7[&aOK&7] &fProtocolLib Found. Using it for crate animations.");
-            } else {
-                CC.warning("&7[&cERROR&7] &fProtocolLib not found. Some features may not work.");
-            }
-
         }
         private void registerConfig(){
             this.configFile = new ConfigFile(plugin, "config.yml");
@@ -125,6 +119,7 @@
             try{
                 CC.info("Hooking PacketEvents...");
                 PacketEvents.getAPI().init();
+                CC.info ( "Hooked PacketEvents.." );
             } catch (Exception e) {
                 CC.line ();
                 CC.error("Si e verificato un problema durante l'hook di PacketEvents : ");

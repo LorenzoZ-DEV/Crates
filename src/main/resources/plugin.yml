@@ -5,7 +5,7 @@ api-version: '1.21'
 softdepend:
   - PacketEvents
   - PlaceholderAPI
-
+  - DecentHolograms
 commands:
   crate:
     description: "Comando per gestire le crate"
