@@ -1,6 +1,7 @@
 package dev.lorenz.crates;
 
 import com.github.retrooper.packetevents.PacketEvents;
+import dev.lorenz.crates.application.crates.VirtualKeyManager;
 import dev.lorenz.crates.application.hooks.CratePlaceholder;
 import dev.lorenz.crates.application.manager.ManagerService;
 import dev.lorenz.crates.commands.CrateCommand;
@@ -101,13 +102,18 @@ public class CratePlugin
     }
 
     private void registerCommands() {
+        var lamp = BukkitLamp.builder(this.getPlugin()).build();
 
-        var lamp = BukkitLamp.builder( this.getPlugin ( ) ).build();
-        lamp.register (
-                new CrateCommand (),
-                new CrateWizardCommand ()
+        VirtualKeyManager keyManager = CratePlugin.getINSTANCE()
+                .getService()
+                .get(VirtualKeyManager.class);
+
+        lamp.register(
+                new CrateCommand(keyManager),
+                new CrateWizardCommand()
         );
     }
+
     private void hookPacketEvents(){
 
         try{

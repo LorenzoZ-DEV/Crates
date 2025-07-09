@@ -107,7 +107,7 @@ public class CrateCommand {
 
         List<LeaderboardEntry> leaderboard;
         if (crateId.equalsIgnoreCase("global")) {
-            leaderboard = stats.getLeaderboard(1, lines); // funziona!
+            leaderboard = stats.getLeaderboard(1, lines);
         } else {
             leaderboard = stats.getLeaderboard(crateId.toLowerCase(), 1, lines);
         }
