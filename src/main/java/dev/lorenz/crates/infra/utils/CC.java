@@ -1,4 +1,4 @@
-package dev.lorenz.crates.infra;
+package dev.lorenz.crates.infra.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

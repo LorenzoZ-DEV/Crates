@@ -1,4 +1,4 @@
-package dev.lorenz.crates.infra;
+package dev.lorenz.crates.infra.utils;
 
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;

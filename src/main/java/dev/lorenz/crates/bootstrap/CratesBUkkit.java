@@ -1,7 +1,7 @@
-package dev.lorenz.crates;
+package dev.lorenz.crates.bootstrap;
 
 import com.github.retrooper.packetevents.PacketEvents;
-import dev.lorenz.crates.infra.CC;
+import dev.lorenz.crates.infra.utils.CC;
 import io.github.retrooper.packetevents.factory.spigot.SpigotPacketEventsBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;

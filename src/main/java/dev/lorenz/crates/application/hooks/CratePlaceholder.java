@@ -1,9 +1,9 @@
 package dev.lorenz.crates.application.hooks;
 
-import dev.lorenz.crates.CratePlugin;
+import dev.lorenz.crates.bootstrap.CratePlugin;
 import dev.lorenz.crates.application.stats.LeaderboardEntry;
-import dev.lorenz.crates.application.stats.StatsManager;
-import dev.lorenz.crates.infra.CC;
+import dev.lorenz.crates.infra.stats.StatsManager;
+import dev.lorenz.crates.infra.utils.CC;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

@@ -1,7 +1,7 @@
-package dev.lorenz.crates.application.stats;
+package dev.lorenz.crates.infra.stats;
 
-import dev.lorenz.crates.CratePlugin;
-import dev.lorenz.crates.infra.CC;
+import dev.lorenz.crates.application.stats.LeaderboardEntry;
+import dev.lorenz.crates.infra.utils.CC;
 import dev.lorenz.crates.infra.sql.DatabaseManager;
 import dev.lorenz.crates.application.manager.Manager;
 import org.bukkit.entity.Player;

@@ -1,4 +1,4 @@
-package dev.lorenz.crates.application.model;
+package dev.lorenz.crates.infra.model;
 
 import lombok.Getter;
 import org.bukkit.configuration.ConfigurationSection;

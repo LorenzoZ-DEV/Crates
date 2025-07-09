@@ -1,11 +1,11 @@
 package dev.lorenz.crates.commands;
 
-import dev.lorenz.crates.CratePlugin;
+import dev.lorenz.crates.bootstrap.CratePlugin;
 import dev.lorenz.crates.application.crates.CrateManager;
 import dev.lorenz.crates.application.model.CrateCreationSession;
-import dev.lorenz.crates.infra.CC;
-import dev.lorenz.crates.infra.ConfigFile;
-import dev.lorenz.crates.application.model.Crate;
+import dev.lorenz.crates.infra.utils.CC;
+import dev.lorenz.crates.infra.utils.ConfigFile;
+import dev.lorenz.crates.infra.model.Crate;
 import revxrsal.commands.annotation.*;
 
 import org.bukkit.Material;

@@ -2,7 +2,7 @@ package dev.lorenz.crates.application.manager;
 
 import dev.lorenz.crates.application.crates.CrateManager;
 import dev.lorenz.crates.application.crates.VirtualKeyManager;
-import dev.lorenz.crates.application.stats.StatsManager;
+import dev.lorenz.crates.infra.stats.StatsManager;
 
 import java.util.ArrayList;
 import java.util.List;

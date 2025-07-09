@@ -1,10 +1,10 @@
 package dev.lorenz.crates.application.crates;
 
-import dev.lorenz.crates.CratePlugin;
-import dev.lorenz.crates.application.model.Crate;
+import dev.lorenz.crates.bootstrap.CratePlugin;
+import dev.lorenz.crates.infra.model.Crate;
 import dev.lorenz.crates.application.manager.Manager;
-import dev.lorenz.crates.infra.CC;
-import dev.lorenz.crates.infra.ConfigFile;
+import dev.lorenz.crates.infra.utils.CC;
+import dev.lorenz.crates.infra.utils.ConfigFile;
 
 import java.util.HashMap;
 import java.util.Map;

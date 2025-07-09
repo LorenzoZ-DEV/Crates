@@ -1,10 +1,10 @@
 package dev.lorenz.crates.commands;
 
-import dev.lorenz.crates.CratePlugin;
+import dev.lorenz.crates.bootstrap.CratePlugin;
 import dev.lorenz.crates.application.crates.VirtualKeyManager;
 import dev.lorenz.crates.application.stats.LeaderboardEntry;
-import dev.lorenz.crates.application.stats.StatsManager;
-import dev.lorenz.crates.infra.CC;
+import dev.lorenz.crates.infra.stats.StatsManager;
+import dev.lorenz.crates.infra.utils.CC;
 import eu.decentsoftware.holograms.api.DHAPI;
 import eu.decentsoftware.holograms.api.DecentHolograms;
 import eu.decentsoftware.holograms.api.holograms.Hologram;

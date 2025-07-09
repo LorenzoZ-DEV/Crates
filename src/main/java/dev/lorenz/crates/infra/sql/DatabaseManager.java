@@ -2,8 +2,8 @@ package dev.lorenz.crates.infra.sql;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import dev.lorenz.crates.infra.CC;
-import dev.lorenz.crates.infra.ConfigFile;
+import dev.lorenz.crates.infra.utils.CC;
+import dev.lorenz.crates.infra.utils.ConfigFile;
 
 import java.sql.Connection;
 import java.sql.SQLException;

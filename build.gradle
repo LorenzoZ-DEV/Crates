@@ -9,8 +9,6 @@ apply plugin: 'java'
 group = 'dev.lorenz'
 version = "1.0.0"
 
-def group = 'dev.lorenz.crates'
-def artifact = 'crates'
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(21))
@@ -74,15 +72,4 @@ tasks.named('shadowJar') {
 
 tasks.build {
     dependsOn tasks.shadowJar
-}
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId = group
-            artifactId = artifact
-
-            from components.java
-        }
-    }
 }

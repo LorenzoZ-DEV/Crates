@@ -1,4 +1,4 @@
-package dev.lorenz.crates;
+package dev.lorenz.crates.bootstrap;
 
 import com.github.retrooper.packetevents.PacketEvents;
 import dev.lorenz.crates.application.crates.VirtualKeyManager;
@@ -6,10 +6,10 @@ import dev.lorenz.crates.application.hooks.CratePlaceholder;
 import dev.lorenz.crates.application.manager.ManagerService;
 import dev.lorenz.crates.commands.CrateCommand;
 import dev.lorenz.crates.commands.CrateWizardCommand;
-import dev.lorenz.crates.infra.CC;
-import dev.lorenz.crates.infra.ConfigFile;
+import dev.lorenz.crates.infra.utils.CC;
+import dev.lorenz.crates.infra.utils.ConfigFile;
 import dev.lorenz.crates.infra.sql.DatabaseManager;
-import dev.lorenz.crates.listener.CrateInteractListener;
+import dev.lorenz.crates.listeners.CrateInteractListener;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;

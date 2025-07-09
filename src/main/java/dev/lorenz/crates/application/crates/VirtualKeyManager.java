@@ -1,7 +1,7 @@
 package dev.lorenz.crates.application.crates;
 
 import dev.lorenz.crates.application.manager.Manager;
-import dev.lorenz.crates.infra.CC;
+import dev.lorenz.crates.infra.utils.CC;
 import dev.lorenz.crates.infra.sql.DatabaseManager;
 
 import java.sql.*;

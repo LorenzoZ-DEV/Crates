@@ -1,6 +1,6 @@
 name: Crates
 version: '${version}'
-main: dev.lorenz.crates.CratesBUkkit
+main: dev.lorenz.crates.bootstrap.CratesBUkkit
 api-version: '1.21'
 softdepend:
   - PacketEvents
