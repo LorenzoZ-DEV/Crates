@@ -40,7 +40,7 @@
                 CC.info("&aAvvio del plugin Crates...");
 
                 registerConfig();
-                databaseManager.start(storageFile);
+                databaseManager.start();
                 registerService();
                 hookPacketEvents();
                 registerCommands();
