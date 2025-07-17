@@ -11,10 +11,11 @@ import revxrsal.commands.annotation.*;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import revxrsal.commands.bukkit.annotation.CommandPermission;
 
 import java.util.*;
-
-@Command("crate wizard")
+@CommandPermission ( "crateadmin.use" )
+@Command("crateadmin")
 public class CrateWizardCommand {
 
     private static final Map<UUID, CrateCreationSession> sessions = new HashMap<>();
@@ -23,6 +24,7 @@ public class CrateWizardCommand {
         sessions.put(sender.getUniqueId(), new CrateCreationSession());
         sender.sendMessage(CC.translate("&aModalità creazione crate avviata!"));
     }
+
 
     @Subcommand("setid")
     public void setId(Player sender, String id) {
