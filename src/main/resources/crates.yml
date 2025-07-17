@@ -15,3 +15,21 @@
 # \ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `' /
 #  `--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'
 
+crates:
+  golden_crate:
+    display_name: '&6Golden Crate'
+    keys:
+      material: TRIPWIRE_HOOK
+      name: '&6Golden Key'
+    rewards:
+      - id: diamond
+        chance: 50
+        item:
+          type: DIAMOND
+          amount: 3
+      - id: gold
+        chance: 50
+        item:
+          type: GOLD_INGOT
+          amount: 5
+

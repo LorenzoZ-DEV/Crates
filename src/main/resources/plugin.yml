@@ -1,5 +1,5 @@
 name: Crates
-version: '${version}'
+version: '1.0.0'
 main: dev.lorenz.crates.bootstrap.CratesBUkkit
 api-version: '1.21'
 softdepend:
@@ -9,3 +9,5 @@ softdepend:
 commands:
   crate:
     description: "Comando per gestire le crate"
+  crateadmin:
+    description: "Comando per gestire le crate come amministratore"
